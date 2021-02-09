@@ -1,17 +1,19 @@
 import Knex from 'knex';
 
 export async function up(knex: Knex){
-    return knex.schema.createTable('classes', table =>{
+    return knex.schema.createTable('dataQrcode', table =>{
         table.increments('id').primary();
-        table.string('subject').notNullable();
-        table.decimal('cost').notNullable();
+        table.string('name').notNullable();
+        table.string('message').notNullable();
+
+       
 
 
         //relacionameto  usuario por aula
-        table.integer('user_id')
+        table.integer('qrcode_id')
             .notNullable()
             .references('id')
-            .inTable('users')
+            .inTable('qrcodes')
             .onUpdate('CASCADE')
             .onDelete('CASCADE'); 
     });
@@ -19,6 +21,6 @@ export async function up(knex: Knex){
 }
 
 export async function down(knex: Knex){
-    return knex.schema.dropTable('classes');
+    return knex.schema.dropTable('dataQrcode');
 
 }
